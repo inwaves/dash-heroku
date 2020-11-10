@@ -60,9 +60,9 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     dcc.Dropdown(
         id='plot-type',
         options=[
-            {'label': 'Bar plot', 'value': 'bar'},
-            {'label': 'Line plot', 'value': 'line'},
-            {'label': 'Scatter plot', 'value': 'scatter'}
+            {'label': 'Bar plot', 'value': 'Bar plot'},
+            {'label': 'Line plot', 'value': 'Line plot'},
+            {'label': 'Scatter plot', 'value': 'Scatter plot'}
         ],
         value=['Bar plot']
     )
@@ -81,12 +81,12 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
 def update_plot(states, plot_type):
     dff = df[df['state'] in states]
 
-    if plot_type == 'bar':
-        fig = px.bar(dff, x="state", y="beef", barmode="group")
-    elif plot_type == 'line':
-        fig = px.line(dff, x="state", y="beef")
-    elif plot_type == 'scatter':
-        fig = px.scatter(dff, x="state", y="beef")
+    # if plot_type == 'Bar plot':
+    fig = px.bar(dff, x="state", y="beef", barmode="group")
+    # elif plot_type == 'Line plot':
+    #     fig = px.line(dff, x="state", y="beef")
+    # elif plot_type == 'Scatter plot':
+    #     fig = px.scatter(dff, x="state", y="beef")
 
     fig.update_layout(
         plot_bgcolor=colors['background'],
