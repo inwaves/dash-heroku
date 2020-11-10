@@ -69,9 +69,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     dcc.Dropdown(
         id='state-selector',
         options=[
-            {'label': 'Alabama', 'value': 'Alabama'},
-            {'label': 'Nebraska', 'value': 'Nebraska'},
-            {'label': 'Texax', 'value': 'Texas'}
+            {'label': i, 'value': i} for i in df.index
         ],
         value=['Alabama'],
         multi=True
@@ -79,7 +77,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
 
     html.Label('Select plot type:'),
     dcc.Dropdown(
-        id='plot-type'
+        id='plot-type',
         options=[
             {'label': 'Bar plot', 'value': 'bar'},
             {'label': 'Line plot', 'value': 'line'},
