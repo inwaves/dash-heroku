@@ -28,7 +28,8 @@ server = app.server
 # Dash init end
 
 # Read DataFrame, generate plot
-df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/c78bf172206ce24f77d6363a2d754b59/raw/c353e8ef842413cae56ae3920b8fd78468aa4cb2/usa-agricultural-exports-2011.csv')
+df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/c78bf172206ce24f77d6363a2d754b59/raw/c353e8ef842413cae56ae3920b8fd78468aa4cb2/usa-agricultural-exports-2011.csv',
+                index_col=0)
 
 fig = px.bar(df, x="state", y="beef", barmode="group")
 
@@ -48,7 +49,7 @@ You can also control the type of plot using the second dropdown.
 # Generate app layout
 app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
     html.Title(children=['US agricultural exports']),
-    
+
     dcc.Markdown(children=md_intro),
 
     html.Div(children=[
@@ -61,7 +62,16 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
         ],
         value=['Alabama'],
         multi=True
-    )]),
+    ),
+    dcc.Dropdown(
+        options=[
+            {'label': 'Bar plot', 'value': 'bar'},
+            {'label': 'Line plot', 'value': 'line'},
+            {'label': 'Scatter plot', 'value': 'scatter'}
+        ],
+        value=['bar']
+    )
+    ]),
 
     dcc.Graph(
         id='agricultural-exports',
