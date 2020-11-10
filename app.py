@@ -1,6 +1,7 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Input, Output
 import plotly.express as px
 import pandas as pd
 
@@ -76,16 +77,16 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
 @app.callback(
     Output('graph-with-filter', 'figure'),
     [Input('state-selector', 'value'),
-    Input('plot-type', 'value')])
+     Input('plot-type', 'value')])
 def update_plot(states, plot_type):
     dff = df[df['state'] in states]
 
-    # if plot_type == 'bar':
-    fig = px.bar(dff, x="state", y="beef", barmode="group")
-    # elif plot_type == 'line':
-    #     fig = px.line(dff, x="state", y="beef")
-    # elif plot_type == 'scatter':
-    #     fig = px.scatter(dff, x="state", y="beef")
+    if plot_type == 'bar':
+        fig = px.bar(dff, x="state", y="beef", barmode="group")
+    elif plot_type == 'line':
+        fig = px.line(dff, x="state", y="beef")
+    elif plot_type == 'scatter':
+        fig = px.scatter(dff, x="state", y="beef")
 
     fig.update_layout(
         plot_bgcolor=colors['background'],
