@@ -16,18 +16,6 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 # Dash init end
 
-def generate_table(dataframe, max_rows=10):
-    return html.Table([
-        html.Thead(
-            html.Tr([html.Th(col) for col in dataframe.columns])
-        ),
-        html.Tbody([
-            html.Tr([
-                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
-            ]) for i in range(min(len(dataframe), max_rows))
-        ])
-    ])
-
 # Read DataFrame, generate plot
 df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/c78bf172206ce24f77d6363a2d754b59/raw/c353e8ef842413cae56ae3920b8fd78468aa4cb2/usa-agricultural-exports-2011.csv',
                 index_col=0)
@@ -70,9 +58,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
 
     # html.Div(id='states-received'),
     # html.Div(id='plot-type-received'),
-    dcc.Graph(id='graph-with-filter'),
-
-    generate_table(df, 10)
+    dcc.Graph(id='graph-with-filter')
 ])
 
 
