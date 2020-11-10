@@ -71,7 +71,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
 
     generate_table(df, 10)
 ])
-# Generated app layout
+
 
 @app.callback(
     Output('graph-with-filter', 'figure'),
@@ -90,8 +90,9 @@ def update_plot(states, plot_type):
     fig.update_layout(
         plot_bgcolor=colors['background'],
         paper_bgcolor=colors['background'],
-        font_color=colors['text']
-    )
+        font_color=colors['text'])
+
+    return fig
 
 if __name__ == '__main__':
     app.run_server(debug=True)
