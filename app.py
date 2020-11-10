@@ -79,8 +79,8 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     [Input('state-selector', 'value'),
      Input('plot-type', 'value')])
 def update_plot(states, plot_type):
-    dff = df[df['state'] in states]
-
+    # dff = df[df['state'] in states]
+    dff = df
     # if plot_type == 'Bar plot':
     fig = px.bar(dff, x="state", y="beef", barmode="group")
     # elif plot_type == 'Line plot':
