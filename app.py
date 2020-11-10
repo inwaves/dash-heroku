@@ -68,6 +68,8 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     )
     ]),
 
+    html.P(id='states-received'),
+    html.P(id='plot-type-received'),
     dcc.Graph(id='graph-with-filter'),
 
     generate_table(df, 10)
@@ -75,12 +77,14 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
 
 
 @app.callback(
-    Output('graph-with-filter', 'figure'),
+    [Output('graph-with-filter', 'figure'),
+     Output('states-received', 'value'),
+     Output('plot-type-received', 'value')],
     [Input('state-selector', 'value'),
      Input('plot-type', 'value')])
 def update_plot(states, plot_type):
-    dff = df[df['state'] in states.value]
-
+    # dff = df[df['state'] in states]
+    dff = df
     # if plot_type == 'Bar plot':
     fig = px.bar(dff, x="state", y="beef", barmode="group")
     # elif plot_type == 'Line plot':
@@ -93,7 +97,7 @@ def update_plot(states, plot_type):
         paper_bgcolor=colors['background'],
         font_color=colors['text'])
 
-    return fig
+    return fig, states, plot_type
 
 if __name__ == '__main__':
     app.run_server(debug=True)
