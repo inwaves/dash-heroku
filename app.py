@@ -76,8 +76,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
 @app.callback(
     Output('graph-with-filter', 'figure'),
     [Input('state-selector', 'value'),
-    Input('plot-type', value)]
-)
+    Input('plot-type', 'value')])
 def update_plot(states, plot_type):
     dff = df[df['state'] in states]
 
