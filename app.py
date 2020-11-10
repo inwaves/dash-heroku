@@ -87,13 +87,13 @@ def update_plot(states, plot_type):
         dff = df
     else:
         dff = df[df['state'].isin(states)]
-        
-    if plot_type == 'Bar plot':
-        fig = px.bar(dff, x="state", y="beef", barmode="group")
+
+    if plot_type == 'Scatter plot':
+        fig = px.scatter(dff, x="state", y="beef")
     elif plot_type == 'Line plot':
         fig = px.line(dff, x="state", y="beef")
     else:
-        fig = px.scatter(dff, x="state", y="beef")
+        fig = px.bar(dff, x="state", y="beef", barmode="group")
     
     fig.update_layout(
         plot_bgcolor=colors['background'],
