@@ -80,12 +80,12 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
 def update_plot(states, plot_type):
     dff = df[df['state'] in states]
 
-    if plot_type == 'bar':
-        fig = px.bar(dff, x="state", y="beef", barmode="group")
-    elif plot_type == 'line':
-        fig = px.line(dff, x="state", y="beef")
-    elif plot_type == 'scatter':
-        fig = px.scatter(dff, x="state", y="beef")
+    # if plot_type == 'bar':
+    fig = px.bar(dff, x="state", y="beef", barmode="group")
+    # elif plot_type == 'line':
+    #     fig = px.line(dff, x="state", y="beef")
+    # elif plot_type == 'scatter':
+    #     fig = px.scatter(dff, x="state", y="beef")
 
     fig.update_layout(
         plot_bgcolor=colors['background'],
