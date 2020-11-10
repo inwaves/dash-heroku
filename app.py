@@ -64,7 +64,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
             {'label': 'Line plot', 'value': 'line'},
             {'label': 'Scatter plot', 'value': 'scatter'}
         ],
-        value=['bar']
+        value=['Bar plot']
     )
     ]),
 
