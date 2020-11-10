@@ -27,27 +27,6 @@ def generate_table(dataframe, max_rows=10):
         ])
     ])
 
-@app.callback(
-    Output('graph-with-filter', 'figure'),
-    [Input('state-selector', 'value'),
-    Input('plot-type', value)]
-)
-def update_plot(states, plot_type):
-    dff = df[df['state'] in states]
-
-    if plot_type == 'bar':
-        fig = px.bar(dff, x="state", y="beef", barmode="group")
-    elif plot_type == 'line':
-        fig = px.line(dff, x="state", y="beef")
-    elif plot_type == 'scatter':
-        fig = px.scatter(dff, x="state", y="beef")
-
-    fig.update_layout(
-        plot_bgcolor=colors['background'],
-        paper_bgcolor=colors['background'],
-        font_color=colors['text']
-    )
-
 # Read DataFrame, generate plot
 df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/c78bf172206ce24f77d6363a2d754b59/raw/c353e8ef842413cae56ae3920b8fd78468aa4cb2/usa-agricultural-exports-2011.csv',
                 index_col=0)
@@ -93,6 +72,27 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     generate_table(df, 10)
 ])
 # Generated app layout
+
+@app.callback(
+    Output('graph-with-filter', 'figure'),
+    [Input('state-selector', 'value'),
+    Input('plot-type', value)]
+)
+def update_plot(states, plot_type):
+    dff = df[df['state'] in states]
+
+    if plot_type == 'bar':
+        fig = px.bar(dff, x="state", y="beef", barmode="group")
+    elif plot_type == 'line':
+        fig = px.line(dff, x="state", y="beef")
+    elif plot_type == 'scatter':
+        fig = px.scatter(dff, x="state", y="beef")
+
+    fig.update_layout(
+        plot_bgcolor=colors['background'],
+        paper_bgcolor=colors['background'],
+        font_color=colors['text']
+    )
 
 if __name__ == '__main__':
     app.run_server(debug=True)
