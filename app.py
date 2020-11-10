@@ -52,7 +52,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
         options=[
             {'label': i, 'value': i} for i in df.state.unique()
         ],
-        value=['Alabama'],
+        value=['All'],
         multi=True
     ),
 
@@ -68,8 +68,8 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     )
     ]),
 
-    html.P(id='states-received'),
-    html.P(id='plot-type-received'),
+    # html.Div(id='states-received'),
+    # html.Div(id='plot-type-received'),
     dcc.Graph(id='graph-with-filter'),
 
     generate_table(df, 10)
@@ -77,27 +77,30 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
 
 
 @app.callback(
-    [Output('graph-with-filter', 'figure'),
-     Output('states-received', 'value'),
-     Output('plot-type-received', 'value')],
+    Output('graph-with-filter', 'figure'),
+    #  Output('states-received', 'children'),
+    #  Output('plot-type-received', 'children')],
     [Input('state-selector', 'value'),
      Input('plot-type', 'value')])
 def update_plot(states, plot_type):
-    # dff = df[df['state'] in states]
-    dff = df
-    # if plot_type == 'Bar plot':
-    fig = px.bar(dff, x="state", y="beef", barmode="group")
-    # elif plot_type == 'Line plot':
-    #     fig = px.line(dff, x="state", y="beef")
-    # elif plot_type == 'Scatter plot':
-    #     fig = px.scatter(dff, x="state", y="beef")
-
+    if states[0] == 'All':
+        dff = df
+    else:
+        dff = df[df['state'].isin(states)]
+        
+    if plot_type == 'Bar plot':
+        fig = px.bar(dff, x="state", y="beef", barmode="group")
+    elif plot_type == 'Line plot':
+        fig = px.line(dff, x="state", y="beef")
+    else:
+        fig = px.scatter(dff, x="state", y="beef")
+    
     fig.update_layout(
         plot_bgcolor=colors['background'],
         paper_bgcolor=colors['background'],
         font_color=colors['text'])
 
-    return fig, states, plot_type
+    return fig
 
 if __name__ == '__main__':
     app.run_server(debug=True)
