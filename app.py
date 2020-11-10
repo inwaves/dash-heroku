@@ -50,7 +50,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     dcc.Dropdown(
         id='state-selector',
         options=[
-            {'label': i, 'value': i} for i in df.index
+            {'label': i, 'value': i} for i in df.state.unique_values()
         ],
         value=['Alabama'],
         multi=True
