@@ -45,20 +45,18 @@ md_intro = '''
 
 # Generate app layout
 app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
-    html.H1(
-        children='Test Dash visualisations',
-        style={
-            'textAlign': 'left',
-            'color': colors['text']
-        }
-    ),
-
     dcc.Markdown(children=md_intro),
 
-    html.Div(children='Dash: A web application framework for Python.', style={
-        'textAlign': 'left',
-        'color': colors['text']
-    }),
+    html.Label('Select state(s)'),
+    dcc.Dropdown(
+        options=[
+            {'label': 'New York City', 'value': 'NYC'},
+            {'label': u'Montréal', 'value': 'MTL'},
+            {'label': 'San Francisco', 'value': 'SF'}
+        ],
+        value=['MTL', 'SF'],
+        multi=True
+    ),
 
     dcc.Graph(
         id='example-graph-2',
