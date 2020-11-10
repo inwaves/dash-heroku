@@ -40,13 +40,18 @@ fig.update_layout(
 # Read, generated plot end
 
 md_intro = '''
-## US states' agricultural exports  
+## US states' agricultural exports 
+You can filter which states are displayed using the first drop-down.
+You can also control the type of plot using the second dropdown.
 '''
 
 # Generate app layout
 app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
+    html.Title(children=['US agricultural exports']),
+    
     dcc.Markdown(children=md_intro),
 
+    html.Div(children=[
     html.Label('Select state(s)'),
     dcc.Dropdown(
         options=[
@@ -54,12 +59,12 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
             {'label': u'Montréal', 'value': 'MTL'},
             {'label': 'San Francisco', 'value': 'SF'}
         ],
-        value=['MTL', 'SF'],
+        value=['Alabama'],
         multi=True
-    ),
+    )]),
 
     dcc.Graph(
-        id='example-graph-2',
+        id='agricultural-exports',
         figure=fig
     ),
 
