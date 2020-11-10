@@ -4,6 +4,17 @@ import dash_html_components as html
 import plotly.express as px
 import pandas as pd
 
+# Dash initialisation
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+colors = {
+    'background': '#FFFFFF',
+    'text': '#000000'
+}
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
+# Dash init end
+
 def generate_table(dataframe, max_rows=10):
     return html.Table([
         html.Thead(
@@ -36,16 +47,6 @@ def update_plot(states, plot_type):
         paper_bgcolor=colors['background'],
         font_color=colors['text']
     )
-# Dash initialisation
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-colors = {
-    'background': '#FFFFFF',
-    'text': '#000000'
-}
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-server = app.server
-# Dash init end
 
 # Read DataFrame, generate plot
 df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/c78bf172206ce24f77d6363a2d754b59/raw/c353e8ef842413cae56ae3920b8fd78468aa4cb2/usa-agricultural-exports-2011.csv',
