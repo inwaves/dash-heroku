@@ -20,8 +20,8 @@ def generate_table(dataframe, max_rows=10):
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 colors = {
-    'background': '#111111',
-    'text': '#7FDBFF'
+    'background': '#FFFFFF',
+    'text': '#000000'
 }
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
@@ -39,18 +39,24 @@ fig.update_layout(
 )
 # Read, generated plot end
 
+md_intro = '''
+## US states' agricultural exports  
+'''
+
 # Generate app layout
 app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
     html.H1(
-        children='Hello Dash',
+        children='Test Dash visualisations',
         style={
-            'textAlign': 'center',
+            'textAlign': 'left',
             'color': colors['text']
         }
     ),
 
+    dcc.Markdown(children=md_intro),
+
     html.Div(children='Dash: A web application framework for Python.', style={
-        'textAlign': 'center',
+        'textAlign': 'left',
         'color': colors['text']
     }),
 
@@ -59,7 +65,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
         figure=fig
     ),
 
-    generate_table(df, 20)
+    generate_table(df, 10)
 ])
 # Generated app layout
 
